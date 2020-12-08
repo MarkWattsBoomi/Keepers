@@ -35,7 +35,7 @@ export default class TabKeeper extends FlowComponent {
     async flowWillMove(xhr: any, request: any) {
         
         this.selectedTab = this.getSelectedTab();
-        localStorage.setItem(this.flowKey + "_" + this.componentId + "_tab",this.selectedTab);
+        sessionStorage.setItem(this.flowKey + "_" + this.componentId + "_tab",this.selectedTab);
     }
 
     async flowMoved(xhr: any, request: any) {
@@ -49,7 +49,7 @@ export default class TabKeeper extends FlowComponent {
                 if(parent) {
                     let thisElement = document.getElementById(parent.id);
                     this.tabsElement = this.findParentTabs(thisElement);
-                    this.selectedTab = localStorage.getItem(this.flowKey + "_" + this.componentId + "_tab"); 
+                    this.selectedTab = sessionStorage.getItem(this.flowKey + "_" + this.componentId + "_tab"); 
                     window.setTimeout(this.setSelectedTab,100);
                 }
             }
@@ -63,7 +63,7 @@ export default class TabKeeper extends FlowComponent {
         let parent: any = manywho.model.getContainer(this.parentId,this.flowKey);
         let thisElement = document.getElementById(parent.id);
         this.tabsElement = this.findParentTabs(thisElement);
-        this.selectedTab = localStorage.getItem(this.flowKey + "_" + this.componentId + "_tab"); 
+        this.selectedTab = sessionStorage.getItem(this.flowKey + "_" + this.componentId + "_tab"); 
         (manywho as any).eventManager.addDoneListener(this.flowMoved, this.componentId);
         (manywho as any).eventManager.addBeforeSendListener(this.flowWillMove, this.componentId);
         //this.parentScroller.addEventListener("scroll", this.scrollMove, {passive: false});
