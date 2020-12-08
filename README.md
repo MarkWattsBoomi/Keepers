@@ -10,7 +10,7 @@ ScrollKeeper & TabKeeper
 
 Pop this component on your page and it will search up the DOM to find the first div which is scrollable.
 
-It then stores the current scroll position into local storage when navigating away from the page and restores that position when re-displaying the page again.
+It then stores the current scroll position into session storage when navigating away from the page and restores that position when re-displaying the page again.
 
 Normally just drop one on the main container.
 
@@ -20,7 +20,7 @@ No config required apart from setting the "ComponentType"="ScrollKeeper";
 
 Pop this component into any child container inside a "Group" container.
 
-It then stores the current selected tab into local storage when navigating away from the page and restores that tab when re-displaying the page again.
+It then stores the current selected tab into session storage when navigating away from the page and restores that tab when re-displaying the page again.
 
 No config required apart from setting the "ComponentType"="TabKeeper";
 

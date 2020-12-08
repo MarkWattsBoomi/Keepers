@@ -40,7 +40,7 @@ export default class ScrollKeeper extends FlowComponent {
     scrollMove(e: any) {
         if(this.scrollLock === false) {
             this.scrollTop = this.parentScroller.scrollTop;
-            localStorage.setItem(this.flowKey + "_" + this.componentId + "_y",this.scrollTop.toString());
+            sessionStorage.setItem(this.flowKey + "_" + this.componentId + "_y",this.scrollTop.toString());
             console.log(this.scrollTop);
             //console.log(window.pageYOffset);
         }
@@ -49,7 +49,7 @@ export default class ScrollKeeper extends FlowComponent {
     async flowWillMove(xhr: any, request: any) {
         this.scrollLock=true;
         this.tScrollTop = this.parentScroller.scrollTop;
-        localStorage.setItem(this.flowKey + "_" + this.componentId + "_y",this.tScrollTop.toString());
+        sessionStorage.setItem(this.flowKey + "_" + this.componentId + "_y",this.tScrollTop.toString());
     }
 
     async flowMoved(xhr: any, request: any) {
@@ -64,7 +64,7 @@ export default class ScrollKeeper extends FlowComponent {
                 if(parent) {
                     let thisElement = document.getElementById(parent.id);
                     this.parentScroller = this.findParentScroller(thisElement);
-                    this.scrollTop = parseFloat(localStorage.getItem(this.flowKey + "_" +this.componentId + "_y") || "0"); 
+                    this.scrollTop = parseFloat(sessionStorage.getItem(this.flowKey + "_" + this.componentId + "_y") || "0"); 
                     window.setTimeout(this.setScrollPos,100);
                 }
             }
@@ -78,7 +78,7 @@ export default class ScrollKeeper extends FlowComponent {
         let parent: any = manywho.model.getContainer(this.parentId,this.flowKey);
         let thisElement = document.getElementById(parent.id);
         this.parentScroller = this.findParentScroller(thisElement);
-        this.scrollTop = parseFloat(localStorage.getItem(this.componentId + "_y") || "0"); 
+        this.scrollTop = parseFloat(sessionStorage.getItem(this.flowKey + "_" + this.componentId + "_y") || "0"); 
         (manywho as any).eventManager.addDoneListener(this.flowMoved, this.componentId);
         (manywho as any).eventManager.addBeforeSendListener(this.flowWillMove, this.componentId);
         //this.parentScroller.addEventListener("scroll", this.scrollMove, {passive: false});
